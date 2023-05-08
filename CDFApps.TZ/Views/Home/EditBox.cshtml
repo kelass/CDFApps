@@ -1,0 +1,24 @@
+﻿@using CDFApps.Domain.dbModels;
+@model Boxes
+<div class="container-fluid">
+    <h1 class="text-center text-primary m-3">Edit box</h1>
+</div>
+<div class="container text-center">
+    
+    <form method="post">
+
+        <input value="@Model.BoxReference" readonly class="form-control"/>
+        <input value="@Model.IsScanned" readonly class="form-control" />
+        <input value="@Model.ReceivedBy" readonly class="form-control" />
+        <input value="@Model.WarehouseJobs.JobNumber" readonly class="form-control" />
+        <select value="@Model.Condition" name="Condition" class="form-select">
+            <option>good</option>
+            <option>broken</option>
+        </select>
+        <input value="@Model.Id" name="Id" type="hidden" readonly class="form-control" />
+        <div class="container-fluid mt-4">
+            <button class="btn btn-primary" type="submit">Edit</button>
+        </div>
+    </form>
+    
+</div>

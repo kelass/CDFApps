@@ -1,0 +1,92 @@
+﻿@using CDFApps.Domain.dbModels;
+@model IEnumerable<Boxes>
+
+<div class="bg-primary">
+    <div class="customRow">
+        <div class="col-5">
+            <h1 class="text-light p-sm-2">Scan: warehouse check in</h1>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-1 btn-group-vertical">
+            <div class="text-center text-light">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                </svg>
+            </div>
+        </div>
+    
+    </div>
+    
+</div>
+
+    <div class="w-auto bg-light m-5 mt-3 border">
+        <div class="p-3">
+        <h1 class="text-primary">CHK20230508-1</h1><br />
+        <div>
+            <form method="post">
+            <input name="box" type="text" />
+            <input type="submit" value="scan"/>
+            </form>
+        </div>
+        <h1 class="text-primary">Scanned items</h1><br />
+
+        <div class="overflow-auto text-nowrap">
+            <table class="table basic-table">
+                <thead class="table-headers">
+                    <tr>
+                        <th>
+                            @Html.Label("#1")
+                        </th>
+                        <th>
+                            @Html.Label("Warehouse job reference")
+                        </th>
+
+                        <th>
+                            @Html.Label("Box reference")
+                        </th>
+                        <th>
+                            @Html.Label("Condition")
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody onload="playAudio()" id="tbody" class="table-records">
+                    @{
+                        int count = 1;
+                        foreach(var box in Model)
+                        {
+                            <tr>
+                            <td>
+                                @count
+                            </td>
+                            <td>
+                            @if(box.WarehouseJobs.IsReceived == true)
+                            {
+                                        <a class="text-dark nav-link" href="/Home/EditBox/@box.Id">@box.WarehouseJobs.JobNumber ✅</a>
+                                        <audio hidden id="myAudio" controls autoplay>
+                                        <source src="~/sound/interface-124464.mp3" type="audio/mp3">
+                                        </audio>
+                            }
+                            else
+                            {
+                                        <a class="text-dark nav-link" href="/Home/EditBox/@box.Id">@box.WarehouseJobs.JobNumber ❌</a>
+                            }
+                                </td>
+                            <td>
+                                @box.BoxReference
+                            </td>
+                            <td>
+                                @box.Condition
+                            </td>
+                            </tr>
+                            count++;
+                            
+                           
+                        }
+                        
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
