@@ -63,13 +63,17 @@
                             @if(box.WarehouseJobs.IsReceived == true)
                             {
                                         <a class="text-dark nav-link" href="/Home/EditBox/@box.Id">@box.WarehouseJobs.JobNumber ✅</a>
-                                        <audio hidden id="myAudio" controls autoplay>
-                                        <source src="~/sound/interface-124464.mp3" type="audio/mp3">
-                                        </audio>
                             }
                             else
                             {
                                         <a class="text-dark nav-link" href="/Home/EditBox/@box.Id">@box.WarehouseJobs.JobNumber ❌</a>
+                                        @if (box.WarehouseJobs.UpdatedOn.Day == DateTime.Now.Day)
+                                        {
+                                            <audio hidden id="myAudio" controls autoplay>
+
+                                                <source src="~/sound/interface-124464.mp3" type="audio/mp3">
+                                            </audio>
+                                        }
                             }
                                 </td>
                             <td>
